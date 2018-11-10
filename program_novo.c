@@ -79,159 +79,105 @@ void menu(int *rota,int *opcao, int resp){
     }
 }
 
+Convencional(int prosseguir){
+    if (prosseguir==1){
+        int linha=13;
+        int coluna=4;
+        int convencional[linha][coluna];
+        int poltrona=0;
+        int posicaoLinha=0;
+        int posicaoColuna=0;
+        int contador=1;
 
+        preencheMatriz(linha, coluna, &onibus);
+        imprimeOnibus(linha, coluna, &onibus)
+
+        int comprou=1;
+        int continuar=0;
+        float passagem=0;
+        while (comprou==1) {
+            printf("Digite o numero do assento pretendido: ");
+            scanf("%d", &poltrona);
+            if (poltrona<1 || poltrona>50){
+                printf("\n\nAtencao!\n O assento escolhido nao existe!\n Escolha outro assento.\n\n");
+            }else{
+                posicaoLinha=(poltrona+1)/4;
+                posicaoColuna=(poltrona+1) % 4;
+                if (onibus[posicaoLinha][posicaoColuna] != 1) {
+                    onibus[posicaoLinha][posicaoColuna] = 1;
+                    printf("\n\nAssento reservado com sucesso!\n\n");
+                    passagem=passagem+1;
+                } else {
+                    printf("\n\nAtencao!\nEsse lugar ja esta ocupado, por favor, tente novamente...\n\n");
+                }
+            }
+
+            imprimeOnibus();
+
+
+            float result=0;
+            int continuar2=1;
+            while(continuar2==1){
+                printf("Deseja reservar outro assento?\n\n 1 - sim\n 2 - nao\n\nOpcao:");
+                scanf("%d",&continuar);
+                if ( continuar<1 || continuar>2){
+                    printf("\n\nAtencao!!! Opcao invalida!\n");
+                }
+                if ( continuar==2){
+                    result= valorCovencional*passagem;
+                    printf("Valor total: R$ %4.2f\n\n",result);
+                    printf("Passagem reservada com sucesso. Volte sempre!\n\n");
+                    continuar2=0;
+                    comprou=0;
+                    teste=0;
+                }
+                if (continuar==1){
+                    continuar2=0;
+                }
+            }
+        }
+    } else if (prosseguir==2) {
+        system("pause");
+    }
+    if ( prosseguir<1 || prosseguir>2){
+        printf("\n\nAtencao!!! Opcao invalida!\n");
+    }
+    if ( prosseguir==2){
+        //continuar3=0;
+        break;
+    }
+    if (prosseguir==1){
+        //continuar3=0;
+        break;
+    }
+}
 
 int comprapassagem(int *opcao, int *rota, int prosseguir, int rot, int opt){
     //swicth case para rotas que vai chamar as funcoes  rota 1,2 e 3
     rot=rota;
     switch(rot){
         case 1: //rota 1
+            float valorCovencional=98.99;
+            float valorExecutivo=99.99;
+            float valorLeito=159.99;
             opt=opcao;
             switch(opt){
-                case 1: //opcao 1
-                    int continuar3=1;
-                    while(continuar3==1){
+                case 1: //opcao 1 (onibus convencional)
+                    //int continuar3=1;
+                    //while(continuar3==1){
                         printf("\n Rota: Rio de Janeiro x SP\n Classe: Convencional\n Preco: R$98,99\n\n");
                         printf(" Deseja prosseguir?\n\n 1 - sim\n 2 - nao\n\nOpcao:");
                         scanf("%d", &prosseguir);
 
-                        if (prosseguir==1){
-                            int linha=13;
-                            int coluna=4;
-                            int convencional[linha][coluna];
-                            int poltrona=0;
-                            int posicaoLinha=0;
-                            int posicaoColuna=0;
-                            int contador=1;
+                    convencional(prosseguir);
+                    //}while
+                break;
 
-                            preencheMatriz(linha, coluna, &onibus);
-                            imprimeOnibus(linha, coluna, &onibus)
-                          //  }
-                        //}
-
-                       // permanencia(int poltrona, int posicaoLinha, int posicaoColuna, int** convencional){
-                        //Condição de permanencia
-                            int comprou=1;
-                            int continuar=0;
-                            float passagem=0;
-                            while (comprou==1) {
-                                printf("Digite o numero do assento pretendido: ");
-                                scanf("%d", &poltrona);
-                                if (poltrona<1 || poltrona>50){
-                                    printf("\n\nAtencao!\n O assento escolhido nao existe!\n Escolha outro assento.\n\n");
-                                }else{
-                                    posicaoLinha=(poltrona+1)/4;
-                                    posicaoColuna=(poltrona+1) % 4;
-                                    if (onibus[posicaoLinha][posicaoColuna] != 1) {
-                                        onibus[posicaoLinha][posicaoColuna] = 1;
-                                        printf("\n\nAssento reservado com sucesso!\n\n");
-                                        passagem=passagem+1;
-                                    } else {
-                                        printf("\n\nAtencao!\nEsse lugar ja esta ocupado, por favor, tente novamente...\n\n");
-                                    }
-                                }
-
-                                imprimeOnibus();
-
-
-                                float result=0;
-                                int continuar2=1;
-                                while(continuar2==1){
-                                    printf("Deseja reservar outro assento?\n\n 1 - sim\n 2 - nao\n\nOpcao:");
-                                    scanf("%d",&continuar);
-                                    if ( continuar<1 || continuar>2){
-                                        printf("\n\nAtencao!!! Opcao invalida!\n");
-                                    }
-                                    if ( continuar==2){
-                                        result= valorCovencional*passagem;
-                                        printf("Valor total: R$ %4.2f\n\n",result);
-                                        printf("Passagem reservada com sucesso. Volte sempre!\n\n");
-                                        continuar2=0;
-                                        comprou=0;
-                                        teste=0;
-                                    }
-                                    if (continuar==1){
-                                        continuar2=0;
-                                    }
-                                }
-                            }
-                        } else if (prosseguir==2) {
-                            system("pause");
-                        }
-                        if ( prosseguir<1 || prosseguir>2){
-                            printf("\n\nAtencao!!! Opcao invalida!\n");
-                        }
-                        if ( prosseguir==2){
-                            continuar3=0;
-                            //comprou=0;
-                           // teste=0;
-                        }
-                        if (prosseguir==1){
-                            continuar3=0;
-                        }
-
-                        int comprou=1;
-                        int continuar=0;
-                        float passagem=0;
-                        while (comprou==1) {
-                            printf("Digite o numero do assento pretendido: ");
-                            scanf("%d", &poltrona);
-                            if (poltrona<1 || poltrona>50){
-                                printf("\n\nAtencao!\n O assento escolhido nao existe!\n Escolha outro assento.\n\n");
-                            }else{
-                                posicaoLinha=(poltrona+1)/4;
-                                posicaoColuna=(poltrona+1) % 4;
-                                if (onibus[posicaoLinha][posicaoColuna] != 1) {
-                                    onibus[posicaoLinha][posicaoColuna] = 1;
-                                    printf("\n\nAssento reservado com sucesso!\n\n");
-                                    passagem=passagem+1;
-                                } else {
-                                    printf("\n\nAtencao!\nEsse lugar ja esta ocupado, por favor, tente novamente...\n\n");
-                                }
-                            }
-
-                            imprimeOnibusXX();
-
-
-                            float result=0;
-                            int continuar2=1;
-                            while(continuar2==1){
-                                printf("Deseja reservar outro assento?\n\n 1 - sim\n 2 - nao\n\nOpcao:");
-                                scanf("%d",&continuar);
-                                if ( continuar<1 || continuar>2){
-                                    printf("\n\nAtencao!!! Opcao invalida!\n");
-                                }
-                                if ( continuar==2){
-                                    result= valorCovencional*passagem;
-                                    printf("Valor total: R$ %4.2f\n\n",result);
-                                    printf("Passagem reservada com sucesso. Volte sempre!\n\n");
-                                    continuar2=0;
-                                    comprou=0;
-                                    teste=0;
-                                }
-                                if (continuar==1){
-                                    continuar2=0;
-                                }
-                            }
-                        } else if (prosseguir==2) {
-                            system("pause");
-                        }
-                        if ( prosseguir<1 || prosseguir>2){
-                            printf("\n\nAtencao!!! Opcao invalida!\n");
-                        }
-                        if ( prosseguir==2){
-                            continuar3=0;
-                            //comprou=0;
-                           // teste=0;
-                        }
-                        if (prosseguir==1){
-                            continuar3=0;
-                        }
-                    }
-                break; //fim opcao 1
-                //opcoes 2 e 3 aqui
+                //opcoes 2 e 3 aqui!(Onibus executivo e leito)
             }
         break;
+
+        //Rotas 2 e 3 aqui!
     }
 
 	int data, opcao, rota, prosseguir;
@@ -240,17 +186,13 @@ int comprapassagem(int *opcao, int *rota, int prosseguir, int rot, int opt){
     	int teste=1;
 
 int main(){
-        menu(&rota,&onibus);
-        switch (rota){
-            float valorCovencional=98.99;
-            float valorExecutivo=99.99;
-            float valorLeito=159.99;
+    menu(&rota,&onibus);
+    comprapassagem();
 
-            case 1:
-                Rota1opcao1();
-            break;
-        break;//rota1
 
+
+ return 0;
+}
 /*
 		    else if (opcao==2){
 	        int prosseguir=0;
@@ -569,5 +511,4 @@ int main(){
 
 //system("pause");
 return 0;
-}
 }
