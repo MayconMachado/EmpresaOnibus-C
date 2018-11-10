@@ -48,7 +48,8 @@ void imprimeOnibus(int linha, int coluna, int** onibus){
     printf("------------------\n");
 }
 //imprime menu e pega entrada de dados
-void menu(int *rota,int *opcao, int resp){
+void menu(int *rota,int *opcao){
+    int resp;
     printf("\n*********************************************          **************");
     printf("\n* Escolha uma das rotas                     *          *  4 - SAIR  *");
     printf("\n* 1 - Rio de Janeiro x Sao Paulo            *          **************");
@@ -79,18 +80,18 @@ void menu(int *rota,int *opcao, int resp){
     }
 }
 
-Convencional(int prosseguir){
+Convencional(int prosseguir, float valorCovencional, int teste){
     if (prosseguir==1){
         int linha=13;
         int coluna=4;
-        int convencional[linha][coluna];
+        int onibus[linha][coluna];
         int poltrona=0;
         int posicaoLinha=0;
         int posicaoColuna=0;
         int contador=1;
 
         preencheMatriz(linha, coluna, &onibus);
-        imprimeOnibus(linha, coluna, &onibus)
+        imprimeOnibus(linha, coluna, &onibus);
 
         int comprou=1;
         int continuar=0;
@@ -112,7 +113,7 @@ Convencional(int prosseguir){
                 }
             }
 
-            imprimeOnibus();
+            imprimeOnibus(linha, coluna, &onibus);
 
 
             float result=0;
@@ -144,22 +145,25 @@ Convencional(int prosseguir){
     }
     if ( prosseguir==2){
         //continuar3=0;
-        break;
+        // break;
+        system("pause");
     }
     if (prosseguir==1){
         //continuar3=0;
-        break;
+        //break;
+        system("pause");
     }
 }
 
-int comprapassagem(int *opcao, int *rota, int prosseguir, int rot, int opt){
+int comprapassagem(int *opcao, int *rota, int prosseguir){
     //swicth case para rotas que vai chamar as funcoes  rota 1,2 e 3
+    int rot,opt;
     rot=rota;
+    float valorCovencional=98.99;
+    float valorExecutivo=99.99;
+    float valorLeito=159.99;
     switch(rot){
         case 1: //rota 1
-            float valorCovencional=98.99;
-            float valorExecutivo=99.99;
-            float valorLeito=159.99;
             opt=opcao;
             switch(opt){
                 case 1: //opcao 1 (onibus convencional)
@@ -169,7 +173,7 @@ int comprapassagem(int *opcao, int *rota, int prosseguir, int rot, int opt){
                         printf(" Deseja prosseguir?\n\n 1 - sim\n 2 - nao\n\nOpcao:");
                         scanf("%d", &prosseguir);
 
-                    convencional(prosseguir);
+                    convencional(prosseguir,valorCovencional);
                     //}while
                 break;
 
@@ -180,14 +184,15 @@ int comprapassagem(int *opcao, int *rota, int prosseguir, int rot, int opt){
         //Rotas 2 e 3 aqui!
     }
 
-	int data, opcao, rota, prosseguir;
+}
+	//int data, opcao, rota, prosseguir;
     	int linhaPretendida=0;
     	int colunaPretendida=0;
     	int teste=1;
 
-int main(){
-    menu(&rota,&onibus);
-    comprapassagem();
+int main(rota,opcao,prosseguir){
+    menu(&rota,&opcao);
+    comprapassagem(opcao,rota,prosseguir);
 
 
 
@@ -506,9 +511,9 @@ int main(){
 	        }
 	    }
 
-*/
+
 
 
 //system("pause");
 return 0;
-}
+}*/
