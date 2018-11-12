@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 // Prenche uma matriz de tamanho linha x coluna com zeros
-void preencheMatriz(int linha, int coluna, int** onibus) {
+void preencheMatriz(int linha, int coluna, int onibus[linha][coluna]) {
     for(int i=0; i<linha; i++) {
     	for (int j=0; j<coluna; j++) {
             onibus[i][j]=0;
@@ -12,7 +12,7 @@ printf("\n Todos os lugares estao disponiveis, aproveite!\n\n");
 }
 
 //Imprime a matriz onibus
-void imprimeOnibus(int linha, int coluna, int** onibus){
+void imprimeOnibus(int linha, int coluna, int onibus[linha][coluna]){
     printf("  /--0------0--\\\n");
     printf(" /  Porta-->     /\n");
     printf("|----------------|\n");
@@ -49,7 +49,7 @@ void imprimeOnibus(int linha, int coluna, int** onibus){
 }
 //imprime menu e pega entrada de dados
 void menu(int *rota,int *opcao){
-    int resp;
+   // int resp;
     printf("\n*********************************************          **************");
     printf("\n* Escolha uma das rotas                     *          *  4 - SAIR  *");
     printf("\n* 1 - Rio de Janeiro x Sao Paulo            *          **************");
@@ -57,13 +57,14 @@ void menu(int *rota,int *opcao){
     printf("\n* 3 - Rio de Janeiro x Miracema             *");
     printf("\n*********************************************");
     printf("\n Rota: ");
-    scanf("%d", &resp);
-    rota = resp;
-		if (rota==4){
+    scanf("%d", rota);
+    //rota = resp;
+   // printf("%d", *rota);
+    if (*rota==4){
         printf("\n\nAtencao!!! O programa foi encerrado!\n\n");
         //teste=0;
         return 0;
-    } else if (rota<1 || rota>3){
+    } else if (*rota<1 || *rota>3){
         printf("\n\nAtencao!!! Opcao invalida!\n");
        	system("pause");
     } else {
@@ -74,13 +75,13 @@ void menu(int *rota,int *opcao){
     printf("\n* 3 - Leito                                 *");
     printf("\n*********************************************");
     printf("\nClasse: ");
-    scanf("%d", &opcao);
-    } if (opcao <1 || opcao>3) {
+    scanf("%d", opcao);
+    } if (*opcao <1 || *opcao>3) {
         printf("\n\nAtencao!!! Opcao invalida!\n");
     }
 }
 
-Convencional(int prosseguir, float valorCovencional, int teste){
+void convencional(int prosseguir, float valorCovencional, int teste){
     if (prosseguir==1){
         int linha=13;
         int coluna=4;
@@ -90,9 +91,8 @@ Convencional(int prosseguir, float valorCovencional, int teste){
         int posicaoColuna=0;
         int contador=1;
 
-        preencheMatriz(linha, coluna, &onibus);
-        imprimeOnibus(linha, coluna, &onibus);
-
+        preencheMatriz(linha, coluna, onibus);
+        imprimeOnibus(linha, coluna, onibus);
         int comprou=1;
         int continuar=0;
         float passagem=0;
@@ -138,7 +138,8 @@ Convencional(int prosseguir, float valorCovencional, int teste){
             }
         }
     } else if (prosseguir==2) {
-        system("pause");
+        //system("pause");
+        getchar();
     }
     if ( prosseguir<1 || prosseguir>2){
         printf("\n\nAtencao!!! Opcao invalida!\n");
@@ -146,26 +147,28 @@ Convencional(int prosseguir, float valorCovencional, int teste){
     if ( prosseguir==2){
         //continuar3=0;
         // break;
-        system("pause");
+         //system("pause");
+        getchar(); problema aqui
     }
     if (prosseguir==1){
         //continuar3=0;
         //break;
-        system("pause");
+         //system("pause");
+        getchar();
     }
 }
 
 int comprapassagem(int *opcao, int *rota, int prosseguir){
     //swicth case para rotas que vai chamar as funcoes  rota 1,2 e 3
-    int rot,opt;
-    rot=rota;
+    int rot,opt,teste=1;
+    //rot=*rota;
     float valorCovencional=98.99;
     float valorExecutivo=99.99;
     float valorLeito=159.99;
-    switch(rot){
+    switch(*rota){
         case 1: //rota 1
-            opt=opcao;
-            switch(opt){
+            //opt=*opcao;
+            switch(*opcao){
                 case 1: //opcao 1 (onibus convencional)
                     //int continuar3=1;
                     //while(continuar3==1){
@@ -173,7 +176,7 @@ int comprapassagem(int *opcao, int *rota, int prosseguir){
                         printf(" Deseja prosseguir?\n\n 1 - sim\n 2 - nao\n\nOpcao:");
                         scanf("%d", &prosseguir);
 
-                    convencional(prosseguir,valorCovencional);
+                    convencional(prosseguir,valorCovencional,teste);
                     //}while
                 break;
 
@@ -186,16 +189,14 @@ int comprapassagem(int *opcao, int *rota, int prosseguir){
 
 }
 	//int data, opcao, rota, prosseguir;
-    	int linhaPretendida=0;
-    	int colunaPretendida=0;
-    	int teste=1;
+    //int linhaPretendida=0;
+    //int colunaPretendida=0;
+    //int teste=1;
 
-int main(rota,opcao,prosseguir){
+int main(){
+    int rota=0,opcao=0,prosseguir=0;
     menu(&rota,&opcao);
-    comprapassagem(opcao,rota,prosseguir);
-
-
-
+    comprapassagem(&opcao,&rota,prosseguir);
  return 0;
 }
 /*
