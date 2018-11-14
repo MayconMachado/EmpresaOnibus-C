@@ -48,7 +48,7 @@ void imprimeOnibus(int linha, int coluna, int onibus[linha][coluna]){
     printf("------------------\n");
 }
 //imprime menu e pega entrada de dados
-void menu(int *rota,int *opcao){
+int menu(int *rota,int *opcao, int *menuloop){
    // int resp;
     printf("\n*********************************************          **************");
     printf("\n* Escolha uma das rotas                     *          *  4 - SAIR  *");
@@ -62,7 +62,7 @@ void menu(int *rota,int *opcao){
    // printf("%d", *rota);
     if (*rota==4){
         printf("\n\nAtencao!!! O programa foi encerrado!\n\n");
-        //teste=0;
+        menuloop=2;
         return 0;
     } else if (*rota<1 || *rota>3){
         printf("\n\nAtencao!!! Opcao invalida!\n");
@@ -82,6 +82,8 @@ void menu(int *rota,int *opcao){
 }
 
 void convencional(int prosseguir, float valorCovencional, int teste){
+int continuar3=1;
+do{
     if (prosseguir==1){
         int linha=13;
         int coluna=4;
@@ -139,23 +141,25 @@ void convencional(int prosseguir, float valorCovencional, int teste){
         }
     } else if (prosseguir==2) {
         //system("pause");
-        getchar();
+        continuar3=0;
+
     }
     if ( prosseguir<1 || prosseguir>2){
         printf("\n\nAtencao!!! Opcao invalida!\n");
     }
     if ( prosseguir==2){
-        //continuar3=0;
+        continuar3=0;
         // break;
          //system("pause");
-        getchar(); problema aqui
+       // getchar(); problema aqui
     }
     if (prosseguir==1){
-        //continuar3=0;
+        continuar3=0;
         //break;
          //system("pause");
-        getchar();
-    }
+        //getchar();
+   }
+}while(continuar3==1);
 }
 
 int comprapassagem(int *opcao, int *rota, int prosseguir){
@@ -194,9 +198,12 @@ int comprapassagem(int *opcao, int *rota, int prosseguir){
     //int teste=1;
 
 int main(){
-    int rota=0,opcao=0,prosseguir=0;
-    menu(&rota,&opcao);
+    int rota=0,opcao=0,prosseguir=0,menuloop=1;
+    do{
+    menu(&rota,&opcao,&menuloop);
+
     comprapassagem(&opcao,&rota,prosseguir);
+    }while(menuloop==1);
  return 0;
 }
 /*
