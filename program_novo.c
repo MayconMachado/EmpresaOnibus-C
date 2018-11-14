@@ -62,22 +62,25 @@ int menu(int *rota,int *opcao, int *menuloop){
    // printf("%d", *rota);
     if (*rota==4){
         printf("\n\nAtencao!!! O programa foi encerrado!\n\n");
-        menuloop=2;
+        *menuloop=2;
         return 0;
     } else if (*rota<1 || *rota>3){
         printf("\n\nAtencao!!! Opcao invalida!\n");
        	system("pause");
     } else {
-    printf("\n*********************************************");
-    printf("\n* Escolha a classe de onibus desejada       *");
-    printf("\n* 1 - Convencional                          *");
+    printf("\n*********************************************          ******************");
+    printf("\n* Escolha a classe de onibus desejada       *          *  4 - CANCELAR  *");
+    printf("\n* 1 - Convencional                          *          ******************");
     printf("\n* 2 - Executivo                             *");
     printf("\n* 3 - Leito                                 *");
     printf("\n*********************************************");
     printf("\nClasse: ");
     scanf("%d", opcao);
-    } if (*opcao <1 || *opcao>3) {
+    } if (*opcao <1 || *opcao>4) {
         printf("\n\nAtencao!!! Opcao invalida!\n");
+    }else if (*opcao == 4){
+        system("clear");
+        return 0;
     }
 }
 
