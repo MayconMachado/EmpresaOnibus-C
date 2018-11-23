@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
+#include <time.h>
 // Prenche uma matriz de tamanho linha x coluna com zeros
 void preencheMatriz(int linha, int coluna, int onibus[linha][coluna]) {
     for(int i=0; i<linha; i++) {
@@ -60,7 +61,8 @@ void imprimeOnibus(int linha, int opcao, int coluna, int onibus[linha][coluna]){
 }
 //imprime menu e pega entrada de dados
 int menu(int *rota,int *opcao, int *menuloop){
-   // int resp;
+    char resp[64];
+    int num;
     printf("\n*********************************************          **************");
     printf("\n* Escolha uma das rotas                     *          *  4 - SAIR  *");
     printf("\n* 1 - Rio de Janeiro x Sao Paulo            *          **************");
@@ -68,7 +70,8 @@ int menu(int *rota,int *opcao, int *menuloop){
     printf("\n* 3 - Rio de Janeiro x Miracema             *");
     printf("\n*********************************************");
     printf("\n Rota: ");
-    scanf("%d", rota);
+    tratamento(resp,num,rota);
+
     if (*rota==4){
         printf("\n\nAtencao!!! O programa foi encerrado!\n\n");
         *menuloop=2;
@@ -84,7 +87,9 @@ int menu(int *rota,int *opcao, int *menuloop){
     printf("\n* 3 - Leito                                 *");
     printf("\n*********************************************");
     printf("\nClasse: ");
-    scanf("%d", opcao);
+    //scanf("%d", opcao);
+    tratamento(resp,num,opcao);
+
     } if (*opcao <1 || *opcao>4) {
         printf("\n\nAtencao!!! Opcao invalida!\n");
     }else if (*opcao == 4){
@@ -93,6 +98,49 @@ int menu(int *rota,int *opcao, int *menuloop){
     }
     system("clear");
 }
+
+void tratamento(char userInput[64], int num, int *p){
+	userInput[64];
+	//int num = 0;
+
+//	while( num == 0 ) {
+
+		//num = 0;
+
+		fgets(userInput, 63, stdin);
+		//length = strlen(userInput);
+        /*
+		if( strlen(userInput) < 2 || strlen(userInput) > 3) {
+			printf("Atencao!!!Opcao invalida!\n");
+			continue;
+		}*/
+
+		if( sscanf(userInput, "%d", &num) != 1) {
+            num=0;
+			printf("Atencao!!!Opcao invalida!\n");
+			//system("sleep 02");
+			//continue;
+
+		}
+        /*
+		if( num < 1 || num > 99) {
+            num=0;
+			printf("Atencao!!!Opcao invalida!\n");
+			continue;
+		}*/
+
+		//printf("Number OK:%d\n",num);
+		//*rota=(int)num;
+//	}
+
+	//printf("\nPassando dados.%d\n",num);
+		//	system("sleep 02");
+    *p=(int)num;
+__fpurge(stdin);
+
+	return *p;
+}
+
 
 void classesOnibus(int prosseguir, float valorPassagem, int teste, int *opcao, int *linha){
 int continuar3=1;
@@ -291,6 +339,7 @@ int comprapassagem(int *opcao, int *rota, int prosseguir, int *linha){
 
 int main(){
     int rota=0,opcao=0,prosseguir=0,menuloop=1,linha=0;
+    //char userInput[64];
     do{
     menu(&rota,&opcao,&menuloop);
 
