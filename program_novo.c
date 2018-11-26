@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include <time.h>
 // Prenche uma matriz de tamanho linha x coluna com zeros
 void preencheMatriz(int linha, int coluna, int onibus[linha][coluna]) {
     for(int i=0; i<linha; i++) {
@@ -48,7 +47,7 @@ void imprimeOnibus(int linha, int opcao, int coluna, int onibus[linha][coluna]){
     }
     printf("------------------\n");
 }
-//imprime menu e chama a funcao de entrada de dados e tratamento
+//imprime menu principal e chama a funcao de entrada de dados e tratamento
 int menuRota(int *rota, char userInput[64], int num, int *menuloop){
 	int loop=1;
 	do{
@@ -63,16 +62,15 @@ int menuRota(int *rota, char userInput[64], int num, int *menuloop){
 	    if (*rota==4){
             printf("\n\nAtencao!!! O programa foi encerrado!\n\n");
             loop=0;
-           *menuloop=0;
-            //return 0;
+            *menuloop=0;
 	    } else if (*rota<0 || *rota>3){
-            printf("\n\nAtencao!!! Opcao invalida!(rota)\n");
+            printf("\n\nAtencao!!! Opcao invalida!\n");
 	    } else{
             loop=0;
 		}
 	}while(loop==1);
-   // system("clear");
 }
+//imprime menu de opcoes e chama funcao entrada de dados e tratamento 
 int menuOpcao(int *opcao, char userInput[64], int num){
 	int loop=1;
 	do{
@@ -85,7 +83,7 @@ int menuOpcao(int *opcao, char userInput[64], int num){
 	    printf("\nClasse: ");
         tratamento(userInput,num,opcao);
         if (*opcao <0 || *opcao>4) {
-            printf("\n\nAtencao!!! Opcao invalida!(opcao)\n");
+            printf("\n\nAtencao!!! Opcao invalida!\n");
         }else if (*opcao == 4){
             system("clear");
             loop=0;
@@ -93,10 +91,8 @@ int menuOpcao(int *opcao, char userInput[64], int num){
            loop=0;
         }   
     }while(loop==1);
-    //system("clear");
-
 }
-
+//entrada de dados e tratamento 
 void tratamento(char userInput[64], int num, int *p){
     int loop=1;
     do{
@@ -115,28 +111,17 @@ void tratamento(char userInput[64], int num, int *p){
     system("clear");
 }
 
-void classesOnibus(int prosseguir,int *rota, float valorPassagem, int teste, int *opcao, int *linha){
-	int continuar3=1;
-	do{
-	    if (prosseguir==1){
-	        int coluna=4;
-	        int onibus[*linha][coluna];
-	        int poltrona=0;
-	        int posicaoLinha=0;
-	        int posicaoColuna=0;
-	        int contador=1; 
-	        preencheMatriz(*linha, coluna, onibus);
-	        imprimeOnibus(*linha,*opcao, coluna, onibus);
-	        int comprou=1;
-	        int continuar=0;
-	        float passagem=0;
-
+void classesOnibus(int prosseguir,int *rota, float valorPassagem, int *opcao, int *linha){
+	int continuar3=1, coluna=4, onibus[*linha][coluna], poltrona=0, posicaoLinha=0, posicaoColuna=0, contador=1, comprou=1,continuar=0;
+	float passagem=0;
+    do{
+        if (prosseguir==1){
+            preencheMatriz(*linha, coluna, onibus);
+            imprimeOnibus(*linha,*opcao, coluna, onibus);
             do{
-	        //while (comprou==1) {
 	            printf("Digite o numero do assento pretendido: ");
 	            scanf("%d", &poltrona);
 	            system("clear");
-
 	            if (*opcao==1){
 	                if (poltrona<1 || poltrona>50){
 	                    printf("\n\nAtencao!\n O assento escolhido nao existe!\n Escolha outro assento.\n\n");
@@ -171,7 +156,6 @@ void classesOnibus(int prosseguir,int *rota, float valorPassagem, int teste, int
 	            float result=0;
 	            int continuar2=1;
                 do{
-	            //while(continuar2==1){
 	                printf("Deseja reservar outro assento?\n\n 1 - sim\n 2 - nao\n\nOpcao:");
 	                scanf("%d",&continuar);
 	                if ( continuar<1 || continuar>2){
@@ -186,7 +170,6 @@ void classesOnibus(int prosseguir,int *rota, float valorPassagem, int teste, int
 	                    printf("Passagem reservada com sucesso. Volte sempre!\n\n");
 	                    continuar2=0;
 	                    comprou=0;
-	                    teste=0;
 	                }
 	                if (continuar==1){
 	                    continuar2=0;
@@ -211,122 +194,110 @@ void classesOnibus(int prosseguir,int *rota, float valorPassagem, int teste, int
 }
 
 int comprapassagem(int *opcao, int *rota, int *prosseguir, int *linha, int num, char userInput[64]){
-    int teste=1,loop=1;
+    int loop=1;
     float valorPassagem;
-    if (*opcao==4)
-    {
+    if (*opcao==4){
         return 0;
-    }
-
-    do{
+    }do{
         switch(*rota){
             case 1: //rota 1
                 switch(*opcao){
-                    case 1: //opcao 1 (onibus convencional)
+                    case 1: //(onibus convencional)
                         *linha=13;
                         printf("\n Rota: Rio de Janeiro x SP\n Classe: Convencional\n Preco: R$98,99\n\n");
                         printf(" Deseja prosseguir?\n\n 1 - sim\n 2 - nao\n\nOpcao:");
-                        //scanf("%d", &prosseguir);
                         tratamento(userInput,num,prosseguir);
                         system("clear");
                         valorPassagem=98.99;
-                        classesOnibus(*prosseguir,rota,valorPassagem,teste,opcao,linha);
+                        classesOnibus(*prosseguir,rota,valorPassagem,opcao,linha);
                         loop=0;
                     break;
-                    case 2:
+                    case 2://(onibus executivo)
                         *linha=12;
                         printf("\n Rota: Rio de Janeiro x SP\n Classe: Executivo\n Preco: R$99,99\n\n");
                         printf(" Deseja prosseguir?\n\n 1 - sim\n 2 - nao\n\nOpcao:");
-                        //scanf("%d", &prosseguir);
                         tratamento(userInput,num,prosseguir);
                         system("clear");
                         valorPassagem=99,99;
-                        classesOnibus(*prosseguir,rota,valorPassagem,teste,opcao,linha);
+                        classesOnibus(*prosseguir,rota,valorPassagem,opcao,linha);
                         loop=0;
                     break;
-                    case 3:
+                    case 3://(onibus leito)
                         *linha=7;
                         printf("\n Rota: Rio de Janeiro x SP\n Classe: Leito\n Preco: R$159,99\n\n");
                         printf(" Deseja prosseguir?\n\n 1 - sim\n 2 - nao\n\nOpcao:");
-                        //scanf("%d", &prosseguir);
                         tratamento(userInput,num,prosseguir);
                         system("clear");
                         valorPassagem=159,99;
-                        classesOnibus(*prosseguir,rota,valorPassagem,teste,opcao,linha);
+                        classesOnibus(*prosseguir,rota,valorPassagem,opcao,linha);
                         loop=0;
                     break;
                 }
             break;
             case 2://rota 2
                 switch(*opcao){
-                    case 1: //opcao 1 (onibus convencional)
+                    case 1:
                         *linha=13;
                         printf("\n Rota: Rio de Janeiro x Belo horizonte\n Classe: Convencional\n Preco: R$103,80\n\n");
                         printf(" Deseja prosseguir?\n\n 1 - sim\n 2 - nao\n\nOpcao:");
-                        //scanf("%d", &prosseguir);
                         tratamento(userInput,num,prosseguir);
                         system("clear");
                         valorPassagem=103.80;
-                        classesOnibus(*prosseguir,rota,valorPassagem,teste,opcao,linha);
+                        classesOnibus(*prosseguir,rota,valorPassagem,opcao,linha);
                         loop=0;
                     break;
                     case 2:
                         *linha=12;
                         printf("\n Rota: Rio de Janeiro x Belo horizonte\n Classe: Executivo\n Preco: R$109,90\n\n");
                         printf(" Deseja prosseguir?\n\n 1 - sim\n 2 - nao\n\nOpcao:");
-                        //scanf("%d", &prosseguir);
                         tratamento(userInput,num,prosseguir);
                         system("clear");
                         valorPassagem=109,90;
-                        classesOnibus(*prosseguir,rota,valorPassagem,teste,opcao,linha);
+                        classesOnibus(*prosseguir,rota,valorPassagem,opcao,linha);
                         loop=0;
                     break;
                     case 3:
                         *linha=7;
                         printf("\n Rota: Rio de Janeiro x Belo horizonte\n Classe: Leito\n Preco: R$139,90\n\n");
                         printf(" Deseja prosseguir?\n\n 1 - sim\n 2 - nao\n\nOpcao:");
-                        //scanf("%d", &prosseguir);
                         tratamento(userInput,num,prosseguir);
                         system("clear");
                         valorPassagem=139,90;
-                        classesOnibus(*prosseguir,rota,valorPassagem,teste,opcao,linha);
+                        classesOnibus(*prosseguir,rota,valorPassagem,opcao,linha);
                         loop=0;
                     break;
                 }
             break;
             case 3://rota3
                 switch(*opcao){
-                    case 1: //opcao 1 (onibus convencional)
+                    case 1:
                         *linha=13;
                         printf("\n Rota: Rio de Janeiro x Miracema\n Classe: Convencional\n Preco: R$73,90\n\n");
                         printf(" Deseja prosseguir?\n\n 1 - sim\n 2 - nao\n\nOpcao:");
-                        //scanf("%d", &prosseguir);
                         tratamento(userInput,num,prosseguir);
                         system("clear");
                         valorPassagem=73.90;
-                        classesOnibus(*prosseguir,rota,valorPassagem,teste,opcao,linha);
+                        classesOnibus(*prosseguir,rota,valorPassagem,opcao,linha);
                         loop=0;
                     break;
                     case 2:
                         *linha=12;
                         printf("\n Rota: Rio de Janeiro x Miracema\n Classe: Executivo\n Preco: R$81,10\n\n");
                         printf(" Deseja prosseguir?\n\n 1 - sim\n 2 - nao\n\nOpcao:");
-                        //scanf("%d", &prosseguir);
                         tratamento(userInput,num,prosseguir);
                         system("clear");
                         valorPassagem=81.10;
-                        classesOnibus(*prosseguir,rota,valorPassagem,teste,opcao,linha);
+                        classesOnibus(*prosseguir,rota,valorPassagem,opcao,linha);
                         loop=0;
                     break;
                     case 3:
                         *linha=7;
                         printf("\n Rota: Rio de Janeiro x Miracema\n Classe: Leito\n Preco: R$88,42\n\n");
                         printf(" Deseja prosseguir?\n\n 1 - sim\n 2 - nao\n\nOpcao:");
-                        //scanf("%d", &prosseguir);
                         tratamento(userInput,num,prosseguir);
                         system("clear");
                         valorPassagem=88.42;
-                        classesOnibus(*prosseguir,rota,valorPassagem,teste,opcao,linha);
+                        classesOnibus(*prosseguir,rota,valorPassagem,opcao,linha);
                         loop=0;
                     break;
                 }
@@ -338,14 +309,14 @@ int comprapassagem(int *opcao, int *rota, int *prosseguir, int *linha, int num, 
 int main(){
     int rota=0,opcao=0,prosseguir=0,menuloop=1,linha=0,num=0;
     char userInput[64], resp[64];
+    system("clear");
     do{
     	menuRota(&rota,userInput,num,&menuloop);
         if (menuloop==0){
             return 0;
         }
     	menuOpcao(&opcao,userInput,num);
- 
-    	comprapassagem(&opcao,&rota,&prosseguir,&linha,num,userInput);
+        comprapassagem(&opcao,&rota,&prosseguir,&linha,num,userInput);
     }while(menuloop==1);
- return 0;
+    return 0;
 }
