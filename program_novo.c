@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 // Prenche uma matriz de tamanho linha x coluna com zeros
 void preencheMatriz(int linha, int coluna, int onibus[linha][coluna]) {
     for(int i=0; i<linha; i++) {
@@ -114,6 +115,8 @@ int menuOpcao(int *opcao, char userInput[64], int num){
 void compraPassagem(int prosseguir,int *rota, float valorPassagem, int *opcao, int *linha){
 	int continuar3=1, coluna=4, onibus[*linha][coluna], poltrona=0, posicaoLinha=0, posicaoColuna=0, contador=1, comprou=1,continuar=0;
 	float passagem=0;
+    FILE *file;
+    file=fopen("teste.txt", "w");
     do{
         if (prosseguir==1){
             preencheMatriz(*linha, coluna, onibus);
@@ -168,6 +171,14 @@ void compraPassagem(int prosseguir,int *rota, float valorPassagem, int *opcao, i
 	                    result= valorPassagem*passagem;
 	                    printf("\n\nValor total: R$ %4.2f\n\n",result);
 	                    printf("Passagem reservada com sucesso. Volte sempre!\n\n");
+                        fprintf(file, "************************************************" );
+                        fprintf(file, "*\n* Você concluiu a compra!                       *\n");
+                        fprintf(file, "* Valor total: R$ %4.2f                        *\n",result);
+                        fprintf(file, "* Passagem reservada com sucesso. Volte sempre! *\n");
+                        fprintf(file, "*************************************************" );
+                        fclose(file); 
+                        sleep(3);
+                        system("clear");
 	                    continuar2=0;
 	                    comprou=0;
 	                }
