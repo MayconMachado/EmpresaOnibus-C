@@ -111,7 +111,7 @@ int menuOpcao(int *opcao, char userInput[64], int num){
     }while(loop==1);
 }
 
-void classesOnibus(int prosseguir,int *rota, float valorPassagem, int *opcao, int *linha){
+void compraPassagem(int prosseguir,int *rota, float valorPassagem, int *opcao, int *linha){
 	int continuar3=1, coluna=4, onibus[*linha][coluna], poltrona=0, posicaoLinha=0, posicaoColuna=0, contador=1, comprou=1,continuar=0;
 	float passagem=0;
     do{
@@ -193,7 +193,7 @@ void classesOnibus(int prosseguir,int *rota, float valorPassagem, int *opcao, in
 	}while(continuar3==1);
 }
 
-int comprapassagem(int *opcao, int *rota, int *prosseguir, int *linha, int num, char userInput[64]){
+int classesOnibus(int *opcao, int *rota, int *prosseguir, int *linha, int num, char userInput[64]){
     int loop=1;
     float valorPassagem;
     if (*opcao==4){
@@ -209,7 +209,7 @@ int comprapassagem(int *opcao, int *rota, int *prosseguir, int *linha, int num, 
                         tratamento(userInput,num,prosseguir);
                         system("clear");
                         valorPassagem=98.99;
-                        classesOnibus(*prosseguir,rota,valorPassagem,opcao,linha);
+                        compraPassagem(*prosseguir,rota,valorPassagem,opcao,linha);
                         loop=0;
                     break;
                     case 2://(onibus executivo)
@@ -219,7 +219,7 @@ int comprapassagem(int *opcao, int *rota, int *prosseguir, int *linha, int num, 
                         tratamento(userInput,num,prosseguir);
                         system("clear");
                         valorPassagem=99,99;
-                        classesOnibus(*prosseguir,rota,valorPassagem,opcao,linha);
+                        compraPassagem(*prosseguir,rota,valorPassagem,opcao,linha);
                         loop=0;
                     break;
                     case 3://(onibus leito)
@@ -229,7 +229,7 @@ int comprapassagem(int *opcao, int *rota, int *prosseguir, int *linha, int num, 
                         tratamento(userInput,num,prosseguir);
                         system("clear");
                         valorPassagem=159,99;
-                        classesOnibus(*prosseguir,rota,valorPassagem,opcao,linha);
+                        compraPassagem(*prosseguir,rota,valorPassagem,opcao,linha);
                         loop=0;
                     break;
                 }
@@ -243,7 +243,7 @@ int comprapassagem(int *opcao, int *rota, int *prosseguir, int *linha, int num, 
                         tratamento(userInput,num,prosseguir);
                         system("clear");
                         valorPassagem=103.80;
-                        classesOnibus(*prosseguir,rota,valorPassagem,opcao,linha);
+                        compraPassagem(*prosseguir,rota,valorPassagem,opcao,linha);
                         loop=0;
                     break;
                     case 2:
@@ -253,7 +253,7 @@ int comprapassagem(int *opcao, int *rota, int *prosseguir, int *linha, int num, 
                         tratamento(userInput,num,prosseguir);
                         system("clear");
                         valorPassagem=109,90;
-                        classesOnibus(*prosseguir,rota,valorPassagem,opcao,linha);
+                        compraPassagem(*prosseguir,rota,valorPassagem,opcao,linha);
                         loop=0;
                     break;
                     case 3:
@@ -263,7 +263,7 @@ int comprapassagem(int *opcao, int *rota, int *prosseguir, int *linha, int num, 
                         tratamento(userInput,num,prosseguir);
                         system("clear");
                         valorPassagem=139,90;
-                        classesOnibus(*prosseguir,rota,valorPassagem,opcao,linha);
+                        compraPassagem(*prosseguir,rota,valorPassagem,opcao,linha);
                         loop=0;
                     break;
                 }
@@ -277,7 +277,7 @@ int comprapassagem(int *opcao, int *rota, int *prosseguir, int *linha, int num, 
                         tratamento(userInput,num,prosseguir);
                         system("clear");
                         valorPassagem=73.90;
-                        classesOnibus(*prosseguir,rota,valorPassagem,opcao,linha);
+                        compraPassagem(*prosseguir,rota,valorPassagem,opcao,linha);
                         loop=0;
                     break;
                     case 2:
@@ -287,7 +287,7 @@ int comprapassagem(int *opcao, int *rota, int *prosseguir, int *linha, int num, 
                         tratamento(userInput,num,prosseguir);
                         system("clear");
                         valorPassagem=81.10;
-                        classesOnibus(*prosseguir,rota,valorPassagem,opcao,linha);
+                        compraPassagem(*prosseguir,rota,valorPassagem,opcao,linha);
                         loop=0;
                     break;
                     case 3:
@@ -297,7 +297,7 @@ int comprapassagem(int *opcao, int *rota, int *prosseguir, int *linha, int num, 
                         tratamento(userInput,num,prosseguir);
                         system("clear");
                         valorPassagem=88.42;
-                        classesOnibus(*prosseguir,rota,valorPassagem,opcao,linha);
+                        compraPassagem(*prosseguir,rota,valorPassagem,opcao,linha);
                         loop=0;
                     break;
                 }
@@ -313,10 +313,10 @@ int main(){
     do{
     	menuRota(&rota,userInput,num,&menuloop);
         if (menuloop==0){
-            return 0;
+            break;
         }
     	menuOpcao(&opcao,userInput,num);
-        comprapassagem(&opcao,&rota,&prosseguir,&linha,num,userInput);
+        classesOnibus(&opcao,&rota,&prosseguir,&linha,num,userInput);
     }while(menuloop==1);
     return 0;
 }
