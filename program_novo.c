@@ -47,40 +47,58 @@ void imprimeOnibus(int linha, int opcao, int coluna, int onibus[linha][coluna]){
     }
     printf("------------------\n");
 }
+//entrada de dados e tratamento 
+int tratamento(char userInput[64], int num, int *p){
+    int loop=1;
+    do{
+        //__fpurge(stdin);
+        setbuf(stdin,NULL);
+        fgets(userInput, 63, stdin);
+        if( sscanf(userInput, "%d", &num) != 1) {
+            printf("Atencao!!!Opcao invalida! Tente novamente!\n");
+        } else if (num==0){
+            printf("Atencao!!!Opcao invalida! Tente novamente!\n");
+        }else{
+           *p=(int)num;
+            loop=0; 
+        }
+    }while(loop==1);
+    system("clear");
+}
 //imprime menu principal e chama a funcao de entrada de dados e tratamento
 int menuRota(int *rota, char userInput[64], int num, int *menuloop){
-	int loop=1;
-	do{
-	    printf("\n*********************************************          **************");
-	    printf("\n* Escolha uma das rotas                     *          *  4 - SAIR  *");
-	    printf("\n* 1 - Rio de Janeiro x Sao Paulo            *          **************");
-	    printf("\n* 2 - Rio de Janeiro x Belo horizonte       *");
-	    printf("\n* 3 - Rio de Janeiro x Miracema             *");
-	    printf("\n*********************************************");
-	    printf("\n Rota: ");
-	    tratamento(userInput,num,rota);
-	    if (*rota==4){
+    int loop=1;
+    do{
+        printf("\n*********************************************          **************");
+        printf("\n* Escolha uma das rotas                     *          *  4 - SAIR  *");
+        printf("\n* 1 - Rio de Janeiro x Sao Paulo            *          **************");
+        printf("\n* 2 - Rio de Janeiro x Belo horizonte       *");
+        printf("\n* 3 - Rio de Janeiro x Miracema             *");
+        printf("\n*********************************************");
+        printf("\n Rota: ");
+        tratamento(userInput,num,rota);
+        if (*rota==4){
             printf("\n\nAtencao!!! O programa foi encerrado!\n\n");
             loop=0;
             *menuloop=0;
-	    } else if (*rota<0 || *rota>3){
+        } else if (*rota<0 || *rota>3){
             printf("\n\nAtencao!!! Opcao invalida!\n");
-	    } else{
+        } else{
             loop=0;
-		}
-	}while(loop==1);
+        }
+    }while(loop==1);
 }
 //imprime menu de opcoes e chama funcao entrada de dados e tratamento 
 int menuOpcao(int *opcao, char userInput[64], int num){
-	int loop=1;
-	do{
-	    printf("\n*********************************************          ******************");
-	    printf("\n* Escolha a classe de onibus desejada       *          *  4 - CANCELAR  *");
-	    printf("\n* 1 - Convencional                          *          ******************");
-	    printf("\n* 2 - Executivo                             *");
-	    printf("\n* 3 - Leito                                 *");
-	    printf("\n*********************************************");
-	    printf("\nClasse: ");
+    int loop=1;
+    do{
+        printf("\n*********************************************          ******************");
+        printf("\n* Escolha a classe de onibus desejada       *          *  4 - CANCELAR  *");
+        printf("\n* 1 - Convencional                          *          ******************");
+        printf("\n* 2 - Executivo                             *");
+        printf("\n* 3 - Leito                                 *");
+        printf("\n*********************************************");
+        printf("\nClasse: ");
         tratamento(userInput,num,opcao);
         if (*opcao <0 || *opcao>4) {
             printf("\n\nAtencao!!! Opcao invalida!\n");
@@ -91,24 +109,6 @@ int menuOpcao(int *opcao, char userInput[64], int num){
            loop=0;
         }   
     }while(loop==1);
-}
-//entrada de dados e tratamento 
-void tratamento(char userInput[64], int num, int *p){
-    int loop=1;
-    do{
-        __fpurge(stdin);
-        fgets(userInput, 63, stdin);
-        if( sscanf(userInput, "%d", &num) != 1) {
-            printf("Atencao!!!Opcao invalida! Tente novamente!\n");
-        } else if (num==0){
-            printf("Atencao!!!Opcao invalida! Tente novamente!\n");
-        }else{
-           *p=(int)num;
-            loop=0;	
-		}
-
-	}while(loop==1);
-    system("clear");
 }
 
 void classesOnibus(int prosseguir,int *rota, float valorPassagem, int *opcao, int *linha){
