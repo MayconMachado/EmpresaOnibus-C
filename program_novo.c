@@ -116,7 +116,7 @@ void compraPassagem(int prosseguir,int *rota, float valorPassagem, int *opcao, i
 	int continuar3=1, coluna=4, onibus[*linha][coluna], poltrona=0, posicaoLinha=0, posicaoColuna=0, contador=1, comprou=1,continuar=0;
 	float passagem=0;
     FILE *file;
-    file=fopen("teste.txt", "w");
+    file=fopen("arquivo.txt", "w");
     do{
         if (prosseguir==1){
             preencheMatriz(*linha, coluna, onibus);
